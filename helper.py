@@ -20,6 +20,13 @@ class Context:
 	def get_args(self):
 		return self.args
 
+def decodeChinese(s: str):
+	ret = ""
+	for c in s:
+		if not '\u4e00' <= c <= '\u9fa5':
+			ret += c
+	return ret
+
 class TexCollector:
 	def __init__(self, c: Context) -> None:
 		self.context = c
@@ -42,7 +49,7 @@ class TexCollector:
 	def _collect(self, path: Path, parent: str):
 		for file in path.iterdir():
 			fileName: str = file.name
-			if file.is_file() and fileName.endswith('.tex'):
+			if file.is_file():
 				n = Node(fileName, data=path / fileName)
 				self.tree.add_node(n, parent)
 			elif file.is_dir():
@@ -50,16 +57,25 @@ class TexCollector:
 				self.tree.add_node(n, parent)
 				self._collect(file, n.identifier)
 	
+	def latex_style_path(self, path: str):
+		path = path.replace("\\\\", "/")
+		path = path.replace("\\", "/")
+		return path
+
 	def make_autoGen(self, autogenFile: Path, genPath: Path, files: List, subDirs: List):
 		lines = []
 		for f in files[:-1]:
-			fPath = str(genPath / f)
+			if not f.endswith('.tex'):
+				continue
+			fPath = self.latex_style_path(decodeChinese(str(genPath / f)))
 			lines.append('\input{' + fPath + '}\n')
 		for d in subDirs:
-			dPath = str(genPath / d)
-			lines.append('\input{' + dPath + '/' + str(d) + '_autoGen.tex}\n')
+			dPath = self.latex_style_path(decodeChinese(str(genPath / d)))
+			lines.append('\input{' + dPath + '/' + str(decodeChinese(d)) + '_autoGen.tex}\n')
 		for f in files[-1:]:
-			fPath = str(genPath / f)
+			if not f.endswith('.tex'):
+				continue
+			fPath = self.latex_style_path(decodeChinese(str(genPath / f)))
 			lines.append('\input{' + fPath + '}\n')
 
 		with open(autogenFile, encoding='utf8', mode='w') as fd:
@@ -70,7 +86,7 @@ class TexCollector:
 			shutil.rmtree(self.autogenPath)
 		self._traverse(self.autogenPath, self.rootPath, self._to_dict())
 	
-	def sort(item: str):
+	def fileNameSort(item: str):
 		order = None
 		if item == 'pre.tex':
 			order = -1
@@ -95,7 +111,6 @@ class TexCollector:
 	def _traverse(self, genPath: Path, srcPath: Path, tree: Dict):
 		assert(len(tree.keys()) == 1)
 
-		relPath = genPath.relative_to(self.autogenPath)
 		treeName = list(tree.keys())[0]
 		data = tree[treeName]
 
@@ -111,7 +126,8 @@ class TexCollector:
 			child_data = child[childName]
 			child_path: Path = child_data['data']
 
-			if child_path.is_file() and not childName.endswith('pre.tex') and not childName.endswith('post.tex'):
+			if child_path.is_file() and childName.endswith('.tex') \
+					and not childName.endswith('pre.tex') and not childName.endswith('post.tex'):
 				isLeave = True
 			elif child_path.is_dir():
 				hasDir = True
@@ -125,12 +141,12 @@ class TexCollector:
 			raise Exception("Not a Valid src Dir")
 		
 		genPath.mkdir(exist_ok=True)
-		autogenFile: Path = genPath / (treeName + '_autoGen.tex')
+		autogenFile: Path = genPath / (decodeChinese(treeName) + '_autoGen.tex')
 		autogenFile.touch(exist_ok=True)
 		self.make_pre_post(genPath, files)
 		
-		subDirs.sort(key=TexCollector.sort)
-		files.sort(key=TexCollector.sort)
+		subDirs.sort(key=TexCollector.fileNameSort)
+		files.sort(key=TexCollector.fileNameSort)
 
 		if isLeave:
 			for child in data.get('children', {}):
@@ -139,6 +155,8 @@ class TexCollector:
 				childName: str = list(child.keys())[0]
 				child_data = child[childName]
 				child_path: Path = child_data['data']
+
+				childName = decodeChinese(childName)
 
 				if child_path.is_file():
 					shutil.copy(child_path, genPath / childName)
@@ -149,6 +167,8 @@ class TexCollector:
 				childName: str = list(child.keys())[0]
 				child_data = child[childName]
 				child_path: Path = child_data['data']
+
+				childName = decodeChinese(childName)
 
 				if child_path.is_dir():
 					self._traverse(genPath / childName, child_path, child)
