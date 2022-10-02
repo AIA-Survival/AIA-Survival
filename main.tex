@@ -1,6 +1,43 @@
 \documentclass{ctexart}
 
+\usepackage[dvipsnames]{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{float}
+\usepackage{tcolorbox}
+\usepackage{changepage}
+\usepackage{tabularx}
+\usepackage{makecell}
+
+\lstset{
+	basicstyle={\ttfamily\footnotesize},
+	keywordstyle={\bfseries\color{NavyBlue}}, 
+	emph={String,main}, 
+	emphstyle={\bfseries\color{Rhodamine}}, 
+	alsoletter={.},
+	commentstyle={\sffamily\color{PineGreen!50!black}}, 
+	stringstyle={\rmfamily\color{Maroon}}, 
+	frame=shadowbox, 
+	framesep=1em, 
+	framerule=1.3pt, 
+	backgroundcolor={\color{lightgray!20!white}}, 
+	rulecolor={\color{CadetBlue}}, 
+	rulesep=3pt, 
+	rulesepcolor={\color{CadetBlue!40!white}}, 
+	numbers=left, 
+	numbersep=2em, 
+	numberstyle={\scriptsize\color{darkgray}}, 
+	showstringspaces=false, 
+	showspaces=false, 
+	showtabs=false, 
+	tabsize=4, 
+	breaklines=true, 
+}
+
 \begin{document}
+
+\tableofcontents
+\clearpage
 
 \input {autoGen/AIA-Survival_autoGen}
 

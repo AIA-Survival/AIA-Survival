@@ -190,8 +190,11 @@ def main():
 	c = Context()
 	tc = TexCollector(c)
 	tc.collect()
-	tc.print_structure()
-	tc.traverse()
+	
+	if c.isDry:
+		tc.print_structure()
+	else:
+		tc.traverse()
 
 if __name__ == '__main__':
 	main()# 
