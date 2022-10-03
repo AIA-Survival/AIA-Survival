@@ -5,7 +5,7 @@ all: $(TARGET)
 
 $(TARGET): $(SRC_TEX)
 	python3 ./helper.py --autogen autoGen --src src
-	latexmk main.tex -outdir=out -interaction=nonstopmode -jobname=AIA-Survival
+	latexmk main.tex -outdir=out -interaction=nonstopmode -xelatex -jobname=AIA-Survival
 	cp out/AIA-Survival.pdf ./AIA-Survival.pdf
 
 dry:

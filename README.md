@@ -7,8 +7,8 @@
 首先运行 `helper.py` 文件，然后编译 `main.tex` 即可。
 
 ```shell
-python ./helper.py
-latexmk main.tex -outdir=out -interaction=nonstopmode -jobname=AIA-Survival
+python3 ./helper.py
+latexmk main.tex -outdir=out -interaction=nonstopmode -xelatex -jobname=AIA-Survival
 ```
 
 ## 参与贡献
