@@ -1,4 +1,3 @@
-from genericpath import isfile
 import json
 import shutil
 from pathlib import Path
@@ -63,20 +62,26 @@ class TexCollector:
 		return path
 
 	def make_autoGen(self, autogenFile: Path, genPath: Path, files: List, subDirs: List):
+		clearPageCmd = "\clearpage\n"
+		clearPageCmd = ""
 		lines = []
+
 		for f in files[:-1]:
 			if not f.endswith('.tex'):
 				continue
 			fPath = self.latex_style_path(decodeChinese(str(genPath / f)))
 			lines.append('\input{' + fPath + '}\n')
+			lines.append(clearPageCmd)
 		for d in subDirs:
 			dPath = self.latex_style_path(decodeChinese(str(genPath / d)))
 			lines.append('\input{' + dPath + '/' + str(decodeChinese(d)) + '_autoGen.tex}\n')
+			lines.append(clearPageCmd)
 		for f in files[-1:]:
 			if not f.endswith('.tex'):
 				continue
 			fPath = self.latex_style_path(decodeChinese(str(genPath / f)))
 			lines.append('\input{' + fPath + '}\n')
+			lines.append(clearPageCmd)
 
 		with open(autogenFile, encoding='utf8', mode='w') as fd:
 			fd.writelines(lines)
@@ -197,4 +202,4 @@ def main():
 		tc.traverse()
 
 if __name__ == '__main__':
-	main()# 
+	main()
