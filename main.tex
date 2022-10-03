@@ -1,4 +1,4 @@
-\documentclass{ctexbook}
+\documentclass{survival}
 
 \usepackage[dvipsnames]{xcolor}
 \usepackage{graphicx}
@@ -8,35 +8,26 @@
 \usepackage{changepage}
 \usepackage{tabularx}
 \usepackage{makecell}
-
-\lstset{
-	basicstyle={\ttfamily\footnotesize},
-	keywordstyle={\bfseries\color{NavyBlue}}, 
-	emph={String,main}, 
-	emphstyle={\bfseries\color{Rhodamine}}, 
-	alsoletter={.},
-	commentstyle={\sffamily\color{PineGreen!50!black}}, 
-	stringstyle={\rmfamily\color{Maroon}}, 
-	frame=shadowbox, 
-	framesep=1em, 
-	framerule=1.3pt, 
-	backgroundcolor={\color{lightgray!20!white}}, 
-	rulecolor={\color{CadetBlue}}, 
-	rulesep=3pt, 
-	rulesepcolor={\color{CadetBlue!40!white}}, 
-	numbers=left, 
-	numbersep=2em, 
-	numberstyle={\scriptsize\color{darkgray}}, 
-	showstringspaces=false, 
-	showspaces=false, 
-	showtabs=false, 
-	tabsize=4, 
-	breaklines=true, 
-}
+\usepackage{hyperref}
 
 \begin{document}
 
-\tableofcontents
+\begin{titlepage}
+  \vspace*{25ex}
+  \hspace{0.05\textwidth}
+  \begin{minipage}{.9\textwidth}
+    \flushright
+    {\zihao{1}\textbf{自动化生存指南}}
+    \rule{\linewidth}{.5pt}
+    \vskip 2ex
+    {\zihao{2}\textsf{AIA-Survival}} \\
+  \end{minipage}
+  \vfill
+  \centering
+{\zihao{4} \href{https://github.com/AIA\-Survival/AIA\-Survival}{$\bullet$ \texttt{https://github.com/AIA\-Survival/AIA\-Survival}}}
+% {\zihao{4} \href{a}{a}}
+\end{titlepage}
+\thispagestyle{empty}
 
 \input {autoGen/AIA-Survival_autoGen}
 
