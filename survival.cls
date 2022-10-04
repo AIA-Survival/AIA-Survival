@@ -2,6 +2,12 @@
 \ProvidesClass{survival}[leeziao]
 \LoadClass[a4paper,oneside]{ctexbook}
 
+
+\RequirePackage{chngcntr}
+\counterwithin{chapter}{part}
+\counterwithout{section}{part}
+
+
 \RequirePackage[dvipsnames]{xcolor}
 \RequirePackage{hyperref}
 
