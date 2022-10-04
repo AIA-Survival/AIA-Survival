@@ -10,7 +10,7 @@
 
 ~~为什么是《自动化生存指南》而非《生存指南》？ 因为 AIA 人尤其需要求生。~~
 
-**We Need Your Help!!** 欢迎贡献你的故事，也欢迎对求生道路进行补充与调整。
+**We Need Your Help!!** 欢迎贡献你的故事，也欢迎对求生道路进行补充与调整，欢迎各式各样的建议
 
 ## 生存指南目录
 
@@ -84,4 +84,14 @@ latexmk main.tex -outdir=out -interaction=nonstopmode -xelatex -jobname=AIA-Surv
 - 将图片等需要引用的资源统一放至 `res` 目录下，并相对该仓库的根目录进行引用，如 `res/pic.png`
 
 如果不熟悉 git/latex，通过其他形式参与贡献也是可以的（比如把文章发给我），不过 **强烈建议** 用 git/latex 的方式进行提交。
+
+---
+
+## 相关链接
+
+- [HUSTPORT | 综合交流平台](http://hustport.com/)
+- [0xFFFF 社区](https://0xffff.one/)
+- [AHUer LeapLap Wiki - 安徽大学飞跃手册](https://www.ahu.wiki/#/)
+- [上海交通大学生存手册](https://survivesjtu.gitbook.io/survivesjtumanual/)
+- [华中科技大学OEI&SES飞跃手册](https://hust-feiyue.github.io/)
 
