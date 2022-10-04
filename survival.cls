@@ -16,7 +16,7 @@
   colorlinks,
   linkcolor={black},
   citecolor={black},
-  urlcolor={black}
+  urlcolor={MidnightBlue}
 }
 
 \RequirePackage{graphicx}
