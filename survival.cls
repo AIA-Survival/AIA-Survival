@@ -164,6 +164,18 @@
   title={#1}
 }
 
+\newtcolorbox{refbox}{
+  colback=blue!5!white,
+  colframe=blue!75!black,
+  coltitle=red!70!black,
+  detach title,
+  breakable,
+  enhanced,
+  before upper={\parindent15pt},
+  after upper={\par\hfill\tcbtitle},
+  title={\textbf{Reference}}
+}
+
 %% 信息
 \newtcolorbox{information}{%
   enhanced,
