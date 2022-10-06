@@ -7,6 +7,8 @@
 \counterwithin{chapter}{part}
 \counterwithout{section}{part}
 
+\RequirePackage{imakeidx}
+
 
 \RequirePackage[dvipsnames]{xcolor}
 \RequirePackage{hyperref}
