@@ -11,6 +11,14 @@
 \usepackage{hyperref}
 
 \CTEXsetup[name={第,节}]{section}
+\makeindex[
+  name=person,
+  title={贡献者索引},
+  intoc=true,
+  columns=2,
+  columnseprule=true
+]
+\newcommand\authorInfo[2]{\marginpar{\faUser #1}\index[person]{#2级!#1}}
 
 \begin{document}
 
